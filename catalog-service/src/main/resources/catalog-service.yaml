@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: Polarstore catalog
+  description: Polarstore catalog
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/
+paths:
+  /books:
+    get:
+      summary: List all books
+      operationId: listAllBooks
+      tags:
+        - books
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Books"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Add book to catalog
+      operationId: addBookToCatalog
+      requestBody:
+        $ref: "#/components/schemas/Book"
+      tags:
+        - books
+      responses:
+        '201':
+          description: Book added
+        '422':
+          description: A book with the same ISBN already exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /books/{isbn}:
+    get:
+      summary: Info for a specific book
+      operationId: viewBookDetail
+      tags:
+        - books
+      parameters:
+        - name: isbn
+          in: path
+          required: true
+          description: The ISBN of the book to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        '404':
+          description: No book with the given ISBN exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update the book with the given ISBN.
+      operationId: editBookDetails
+      requestBody:
+        $ref: "#/components/schemas/Book"
+      tags:
+        - books
+      responses:
+        '200':
+          description: Book details was updated
+        '404':
+          description: No book with the given ISBN exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete the book with the given ISBN.
+      operationId: removeBookFromCatalog
+      tags:
+        - books
+      responses:
+        '204':
+          description: Book was deleted
+        '404':
+          description: No book with the given ISBN exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Book:
+      type: object
+      required:
+        - isbn
+        - title
+        - author
+        - price
+      properties:
+        isbn:
+          type: string
+        name:
+          type: string
+        tag:
+          type: string
+        price:
+          type: number
+    Books:
+      type: array
+      items:
+        $ref: "#/components/schemas/Book"
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
