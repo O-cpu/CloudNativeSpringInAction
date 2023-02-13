@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-service
+spec:
+  selector:
+    matchLabels:
+      name: catalog-service
+  template:
+    metadata:
+      name: catalog-service
+    spec:
+      containers:
+        - name: catalog-service
+          ports:
+            - containerPort: 8080
+          image:
