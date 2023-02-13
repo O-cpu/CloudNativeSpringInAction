@@ -30,8 +30,10 @@ jobs:                         #
 #        with:
 #          sarif_file: ${{ steps.scan.outputs.sarif }} # Fetches the report from the output of the previous step
       - name: Build, unit tests and integration tests
-        run: ./gradlew build                              # Runs the Gradle build task, which compiles the codebase and runs unit and integration tests
-#          chmod +x gradlew                             # Ensures the Gradle wrapper is executable, solving Windows incompatibilities
+        run: |
+          cd catalog-service
+          chmod +x gradlew                             # Ensures the Gradle wrapper is executable, solving Windows incompatibilities
+          ./gradlew build                              # Runs the Gradle build task, which compiles the codebase and runs unit and integration tests
 # git update-index --chmod=+x catalog-service/gradlew
 # git commit -m "Make gradlew executable"
 # git push -u origin main
