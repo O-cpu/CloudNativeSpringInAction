@@ -22,7 +22,6 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
-    systemProperty "spring.aot.enabled", "true"
 }
 
 openApiGenerate {
