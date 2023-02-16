@@ -1,8 +1,10 @@
 package com.example.catalogservice.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 @ConfigurationProperties(prefix = "polar")
+@RefreshScope
 public class PolarProperties {
 
     private String greeting = "Hello world";

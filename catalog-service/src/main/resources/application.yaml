@@ -26,3 +26,9 @@ spring:
         initial-interval: 1000    # Initial retry interval for backoff (ms)
         max-interval: 5000        # Maximum retry interval for backoff (ms)
         multiplier: 1.1           # Multiplier to compute the next interval
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health, refresh
