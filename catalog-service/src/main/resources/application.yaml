@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 20
+    connection-timeout: 5
+    keep-alive-timeout: 15
+polar:
+  greeting: Welcome to local book store!!!
+spring:
+  profiles:
+    active: default
+  application:
+    name: catalog-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      request-connect-timeout: 5000
+      request-read-timeout: 5000
+      uri: http://localhost:8888
+      fail-fast: true             # Makes a failure to connect to the config server fatal
+      retry:
+        max-attempts: 6           # Maximum number of attempts
+        initial-interval: 1000    # Initial retry interval for backoff (ms)
+        max-interval: 5000        # Maximum retry interval for backoff (ms)
+        multiplier: 1.1           # Multiplier to compute the next interval
