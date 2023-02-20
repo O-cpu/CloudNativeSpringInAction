@@ -19,9 +19,9 @@ public class BookDataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadBookTestData() {
-        repo.save(new Book("1234567890", "Northern Lights",
+        repo.save(Book.of("1234567890", "Northern Lights",
                 "Lyra Silverstar", 9.90));
-        repo.save(new Book("1234567892", "Polar Journey",
+        repo.save(Book.of("1234567892", "Polar Journey",
                 "Iorek Polarson", 12.90));
     }
 }
