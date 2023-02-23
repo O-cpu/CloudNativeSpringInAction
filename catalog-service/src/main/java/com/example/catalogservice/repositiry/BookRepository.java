@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
-    @NonNull Iterable<Book> findAll();
+    @NonNull
+    Iterable<Book> findAll();
 
     Optional<Book> findByIsbn(String isbn);
 
@@ -18,7 +19,9 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     @Modifying
     @Transactional
-    @NonNull Book save(@NonNull Book book);
+    @Override
+    @NonNull
+    <S extends Book> S save(@NonNull S entity);
 
     @Modifying
     @Transactional
