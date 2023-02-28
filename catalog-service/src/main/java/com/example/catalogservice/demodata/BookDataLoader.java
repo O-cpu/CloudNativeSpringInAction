@@ -21,8 +21,8 @@ public class BookDataLoader {
     public void loadBookTestData() {
         repo.deleteAll();
         repo.save(Book.of("1234567890", "Northern Lights",
-                "Lyra Silverstar", 9.90));
+                "Lyra Silverstar", 9.90, "Alpina"));
         repo.save(Book.of("1234567892", "Polar Journey",
-                "Iorek Polarson", 12.90));
+                "Iorek Polarson", 12.90, "AWS press"));
     }
 }

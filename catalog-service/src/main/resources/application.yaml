@@ -25,7 +25,7 @@ spring:
         max-attempts: 6           # Maximum number of attempts
         initial-interval: 1000    # Initial retry interval for backoff (ms)
         max-interval: 5000        # Maximum retry interval for backoff (ms)
-        multiplier: 1.1           # Multiplier to compute the next interval
+        multiplier: 1.1           # Multiplier to compute the next interva
 management:
   endpoints:
     web:
